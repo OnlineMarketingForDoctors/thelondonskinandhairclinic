@@ -1,0 +1,64 @@
+---
+import { navMain, conditions, treatments, contact } from '../data/site.js';
+const megas = { conditions, treatments };
+---
+<header class="hdr" data-header>
+  <div class="hdr__bar">
+    <a class="hdr__logo" href="/" aria-label="The London Skin and Hair Clinic, home">
+      <img src="/images/brand/logo.svg" alt="The London Skin and Hair Clinic" width="230" height="40" />
+    </a>
+
+    <nav class="hdr__nav" aria-label="Main">
+      <ul>
+        {navMain.map((item) => (
+          <li class={item.mega ? 'has-mega' : ''}>
+            <a href={item.href}>{item.label}</a>
+            {item.mega && (
+              <div class="mega">
+                <div class="mega__inner">
+                  {megas[item.mega].map((g) => (
+                    <div class="mega__col">
+                      <p class="mega__title">{g.title}</p>
+                      <ul>
+                        {g.links.slice(0, 10).map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hdr__actions">
+      <a class="hdr__phone" href={contact.phoneHref}>
+        <span class="hdr__phone-label">Call us now</span>
+        <span class="hdr__phone-num">{contact.phone}</span>
+      </a>
+      <a class="btn btn--amber hdr__cta" href={contact.booking}>Book a consultation</a>
+    </div>
+
+    <!-- Mobile controls -->
+    <a class="btn btn--amber hdr__mcta" href={contact.booking}>Book a consultation</a>
+    <div class="hdr__mobile">
+      <a class="icon-btn" href={contact.phoneHref} aria-label={`Call us on ${contact.phone}`}>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z" fill="currentColor"/></svg>
+      </a>
+      <button class="icon-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav" data-menu-toggle>
+        <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mnav" id="mnav" hidden>
+    <nav aria-label="Mobile">
+      <ul>
+        {navMain.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+      <a class="mnav__phone" href={contact.phoneHref}><span>Call us now</span>{contact.phone}</a>
+      <a class="btn btn--amber btn--block" href={contact.booking}>Book a consultation</a>
+    </nav>
+  </div>
+</header>

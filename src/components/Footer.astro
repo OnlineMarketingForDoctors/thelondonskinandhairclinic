@@ -1,0 +1,64 @@
+---
+import { contact, conditions, treatments, patientLinks, legalLinks, OLD } from '../data/site.js';
+const year = new Date().getFullYear();
+---
+<footer class="ftr">
+  <div class="wrap ftr__grid">
+    <div class="ftr__brand">
+      <img class="ftr__logo" src="/images/brand/logo.svg" alt="The London Skin and Hair Clinic" width="240" height="42" loading="lazy" />
+      <p>Private medical dermatology for skin, hair, scalp and nails, for adults and children, beside Holborn station.</p>
+      <a class="btn btn--amber" href={contact.booking}>Book a consultation</a>
+    </div>
+
+    <div>
+      <p class="ftr__h">Conditions</p>
+      <ul>
+        {conditions.map((g) => <li><a href={g.href}>{g.title}</a></li>)}
+        <li><a href={`${OLD}/skin-cancer/`}>Skin cancer</a></li>
+        <li><a href={`${OLD}/psoriasis/`}>Psoriasis</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="ftr__h">Treatments</p>
+      <ul>
+        {treatments.map((g) => <li><a href={g.links[0] && g.external ? 'https://londonrealskin.com/' : `${OLD}/dermatology-treatments/`}>{g.title}</a></li>)}
+        <li><a href={`${OLD}/mole-mapping/`}>Mole mapping</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="ftr__h">For patients</p>
+      <ul>
+        {patientLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+
+    <div class="ftr__contact">
+      <p class="ftr__h">Visit us</p>
+      <address>
+        {contact.address.map((l) => <span>{l}</span>)}
+      </address>
+      <a class="ftr__phone" href={contact.phoneHref}>{contact.phone}</a>
+      <a href={`mailto:${contact.email}`}>{contact.email}</a>
+      <dl class="ftr__hours">
+        {contact.hours.map(([d, h]) => (<div><dt>{d}</dt><dd>{h}</dd></div>))}
+      </dl>
+      <a class="ftr__ig" href={contact.instagram} target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+
+  <div class="wrap ftr__base">
+    <p>&copy; {year} The London Skin and Hair Clinic</p>
+    <ul>
+      {legalLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+    <a class="ftr__omd" href="https://onlinemarketingfordoctors.com/" target="_blank" rel="noopener">
+      <img src="/images/brand/omd-cross.webp" alt="" width="18" height="18" loading="lazy" />
+      Powered by Online Marketing For Doctors
+    </a>
+  </div>
+</footer>

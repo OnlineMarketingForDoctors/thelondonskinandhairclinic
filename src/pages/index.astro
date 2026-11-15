@@ -1,0 +1,611 @@
+---
+import Base from '../layouts/Base.astro';
+import reviews from '../data/reviews.json';
+import { contact, conditions, treatments, team, posts, faqs, OLD } from '../data/site.js';
+
+const fmt = (d) => new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const [lead, ...morePosts] = posts;
+const stars = '★★★★★';
+const igPosts = Array.from({ length: 8 }, (_, i) => `/images/instagram/post-${i + 1}.webp`);
+---
+<Base
+  title="The London Skin and Hair Clinic | Private Dermatologists in Holborn, London"
+  description="Consultant dermatologists diagnosing and treating skin, hair, scalp and nail conditions for adults and children at our private clinic beside Holborn station."
+>
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="/images/hero-poster.webp" data-hero-video aria-hidden="true">
+      <source src="/video/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__shade" aria-hidden="true"></div>
+
+    <div class="wrap hero__inner">
+      <div class="hero__copy">
+        <h1 id="hero-title" class="hero__title load-in" style="--d:0">
+          Expert care for your skin, hair and scalp in the heart of London
+        </h1>
+        <p class="hero__sub load-in" style="--d:1">
+          Consultant dermatologists who diagnose, treat and reassure adults and children, at a modern private clinic beside Holborn station.
+        </p>
+        <ul class="hero__points">
+          <li class="load-in" style="--d:2">Consultant dermatologists on the GMC Specialist Register</li>
+          <li class="load-in" style="--d:2.4">Appointments within days, including evenings and Saturdays</li>
+          <li class="load-in" style="--d:2.8">Direct billing with major private health insurers</li>
+          <li class="load-in" style="--d:3.2">Tests, procedures and a dispensary all on site</li>
+          <li class="load-in" style="--d:3.6">In-clinic or video consultations</li>
+        </ul>
+        <div class="hero__ctas load-in" style="--d:4.2">
+          <a class="btn btn--amber btn--lg" href={contact.booking}>Book a consultation</a>
+          <a class="btn btn--glass btn--lg" href={`${OLD}/find-a-dermatologist/`}>Find a dermatologist</a>
+        </div>
+      </div>
+
+      <a class="gbadge load-in" style="--d:5" href="#reviews" aria-label="Rated 4.6 out of 5 from 500 Google reviews. Read reviews">
+        <span class="gbadge__g" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="34" height="34"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+        </span>
+        <span class="gbadge__body">
+          <span class="gbadge__score">4.6 <span class="stars stars--sm" style="--rating:4.6" aria-hidden="true">{stars}</span></span>
+          <span class="gbadge__count">500 Google reviews</span>
+        </span>
+      </a>
+    </div>
+
+    <a class="hero__scroll" href="#reviews" aria-label="Scroll to reviews"><span></span></a>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews" aria-labelledby="reviews-title">
+    <div class="wrap reviews__head">
+      <div>
+        <h2 id="reviews-title" class="h2 reveal">Patients trust us with what matters to them</h2>
+        <p class="lede reveal">Rated 4.6 out of 5 from 500 reviews on Google.</p>
+      </div>
+      <div class="carousel__ctrls reveal">
+        <button class="round-btn" type="button" aria-label="Previous review" data-car-prev>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="round-btn" type="button" aria-label="Next review" data-car-next>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="carousel" data-carousel aria-roledescription="carousel" aria-label="Google reviews">
+      <ul class="carousel__track" data-car-track>
+        {reviews.map((r, i) => (
+          <li class="rcard" aria-roledescription="slide" aria-label={`Review ${i + 1} of ${reviews.length}`}>
+            <svg class="rcard__g" viewBox="0 0 48 48" width="26" height="26" aria-label="Google review" role="img"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>
+            <div class="rcard__who">
+              <span class="rcard__avatar" aria-hidden="true">{r.name.trim().charAt(0)}</span>
+              <span class="rcard__name">{r.name}</span>
+            </div>
+            <span class="stars" aria-label="5 out of 5 stars">{stars}</span>
+            <div class="rcard__text" data-clamp>
+              {r.text.split('\n\n').map((p) => <p>{p}</p>)}
+            </div>
+            <button class="rcard__more" type="button" data-more hidden>Read more</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="wrap carousel__foot">
+      <div class="carousel__progress" aria-hidden="true"><span data-car-bar></span></div>
+      <a class="link-arrow" href={contact.googleReviews} target="_blank" rel="noopener">See all reviews on Google</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" aria-labelledby="about-title">
+    <div class="wrap about__grid">
+      <div class="about__collage">
+        <figure class="about__main reveal">
+          <img src="/images/photos/reception.webp" alt="The clinic reception with leather armchairs and the clinic name on the wall" width="1600" height="1067" loading="lazy" />
+        </figure>
+        <figure class="about__sat about__sat--a reveal" data-parallax="-0.06">
+          <img src="/images/photos/wade-sign-sm.webp" alt="Dr Martin Wade beside the clinic sign" width="800" height="534" loading="lazy" />
+        </figure>
+        <figure class="about__sat about__sat--b reveal" data-parallax="0.08">
+          <img src="/images/photos/building-sm.webp" alt="233 High Holborn, the building that houses the clinic" width="800" height="533" loading="lazy" />
+        </figure>
+        <div class="about__stat glass-card reveal" data-parallax="0.04">
+          <strong>Almost 20 years</strong>
+          <span>of trusted private dermatology care in central London</span>
+        </div>
+      </div>
+
+      <div class="about__copy">
+        <h2 id="about-title" class="h2 reveal">A specialist clinic for medical dermatology</h2>
+        <p class="reveal">
+          The London Skin and Hair Clinic is a leading medical dermatology clinic with an international reputation. Our consultant dermatologists diagnose and treat conditions affecting the skin, hair, scalp, mouth, nails and genitals.
+        </p>
+        <p class="reveal">
+          Thousands of people visit us each year for a clear diagnosis, effective treatment and reassurance. Our bright, modern clinic has the equipment for tests, light therapies and minor surgery on site, so most patients never need to go elsewhere.
+        </p>
+        <ul class="about__facts reveal">
+          <li><strong>24</strong><span>consultant dermatologists and plastic surgeons</span></li>
+          <li><strong>6 days</strong><span>a week, with lunchtime and evening slots</span></li>
+          <li><strong>1 min</strong><span>walk from Holborn station</span></li>
+        </ul>
+        <a class="btn btn--navy reveal" href={`${OLD}/our-vision-mission-and-values/`}>About the clinic</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TREATMENTS -->
+  <section class="treat" aria-labelledby="treat-title" data-tabs>
+    <div class="wrap">
+      <div class="treat__head">
+        <h2 id="treat-title" class="h2 reveal">Treatments, matched to your diagnosis</h2>
+        <p class="lede reveal">Every treatment plan starts with a consultant. Choose an area to see what we offer.</p>
+      </div>
+
+      <div class="treat__grid">
+        <div class="treat__tabs" role="tablist" aria-label="Treatment groups">
+          {treatments.map((g, i) => (
+            <button class="treat__tab" role="tab" id={`tt-${g.id}`} aria-controls={`tp-${g.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} type="button">
+              <span class="treat__tab-title">{g.title}</span>
+              <span class="treat__tab-count">{g.links.length} treatments</span>
+            </button>
+          ))}
+          <a class="link-arrow treat__all" href={`${OLD}/dermatology-treatments/`}>View all treatments</a>
+        </div>
+
+        <div class="treat__stage">
+          {treatments.map((g, i) => (
+            <div class="treat__panel" role="tabpanel" id={`tp-${g.id}`} aria-labelledby={`tt-${g.id}`} hidden={i !== 0} data-active={i === 0 ? 'true' : 'false'}>
+              <figure class="treat__img">
+                <img src={g.image} alt={g.alt} loading="lazy" width="1600" height="1067" />
+              </figure>
+              <figure class="treat__sat">
+                <img src={g.satellite} alt={g.satelliteAlt} loading="lazy" width="800" height="533" />
+              </figure>
+              <div class="treat__card">
+                <h3 class="h3">{g.title}</h3>
+                <p>{g.summary}</p>
+                <ul class="pill-list">
+                  {g.links.map((l) => (
+                    <li><a href={l.href} target={g.external ? '_blank' : undefined} rel={g.external ? 'noopener' : undefined}>{l.label}</a></li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="why" aria-labelledby="why-title">
+    <div class="why__bg" aria-hidden="true">
+      <img src="/images/photos/waiting.webp" alt="" loading="lazy" width="1600" height="1067" data-parallax-bg />
+    </div>
+    <div class="wrap why__grid">
+      <div class="why__intro">
+        <h2 id="why-title" class="h2 h2--light reveal">Why patients choose us</h2>
+        <p class="reveal">Specialist knowledge, quick access and a clinic designed around you. Here is what that means in practice.</p>
+        <a class="btn btn--amber reveal" href={contact.booking}>Book a consultation</a>
+      </div>
+      <ul class="why__list">
+        <li class="why__item reveal">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3l11 4v8c0 7-4.7 12.3-11 14C9.7 27.3 5 22 5 15V7z M11 16l3.5 3.5L21 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          <h3>Consultants only</h3>
+          <p>Every dermatologist is on the GMC Specialist Register and a member of the British Association of Dermatologists.</p>
+        </li>
+        <li class="why__item reveal">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 9v7l5 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <h3>Seen within days</h3>
+          <p>Appointments Monday to Saturday, with lunchtime and evening slots that fit around work and school.</p>
+        </li>
+        <li class="why__item reveal">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="8" width="24" height="17" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 13h24M9 20h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <h3>Insured patients welcome</h3>
+          <p>Direct billing with BUPA, AXA Health, Aviva, Cigna, WPA, Vitality and many international insurers.</p>
+        </li>
+        <li class="why__item reveal">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 27V12l11-7 11 7v15z M12 27v-8h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <h3>Everything under one roof</h3>
+          <p>Biopsies, mole mapping, phototherapy, minor surgery and an on-site dispensary. No referrals elsewhere.</p>
+        </li>
+        <li class="why__item reveal">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="11" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="22" cy="13" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 26c0-4.4 3.6-8 8-8s8 3.6 8 8M17 26c0-3 2.2-5.5 5-5.5s5 2.5 5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <h3>For adults and children</h3>
+          <p>Paediatric dermatologists, a children's play corner and unhurried appointments for anxious first-timers.</p>
+        </li>
+        <li class="why__item reveal">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 29s-9-8.2-9-15a9 9 0 0118 0c0 6.8-9 15-9 15z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="14" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          <h3>Central and easy to reach</h3>
+          <p>At 233 High Holborn, a minute from Holborn station on the Central and Piccadilly lines.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team" aria-labelledby="team-title" data-team>
+    <div class="wrap">
+      <div class="team__head">
+        <h2 id="team-title" class="h2 reveal">Meet some of our dermatologists</h2>
+        <a class="link-arrow reveal" href={`${OLD}/find-a-dermatologist/`}>See all 24 specialists</a>
+      </div>
+
+      <div class="team__grid">
+        <div class="team__picker" role="tablist" aria-label="Dermatologists">
+          {team.map((d, i) => (
+            <button class="team__thumb" role="tab" type="button" id={`dt-${d.id}`} aria-controls={`dp-${d.id}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>
+              <img src={d.image} alt="" width="900" height="1125" loading="lazy" />
+              <span>{d.name}</span>
+            </button>
+          ))}
+        </div>
+
+        {team.map((d, i) => (
+          <article class="doc" role="tabpanel" id={`dp-${d.id}`} aria-labelledby={`dt-${d.id}`} hidden={i !== 0}>
+            <figure class="doc__photo">
+              <img src={d.image} alt={`Portrait of ${d.name}`} width="900" height="1125" loading="lazy" />
+              <figcaption class="doc__tag glass-card">
+                <strong>{d.name}</strong>
+                <span>{d.role}</span>
+              </figcaption>
+            </figure>
+            <div class="doc__body">
+              <p class="doc__letters">{d.letters}</p>
+              <h3 class="h3">{d.name}</h3>
+              {d.bio.map((p) => <p>{p}</p>)}
+              <ul class="chip-list" aria-label="Areas of interest">
+                {d.focus.map((f) => <li>{f}</li>)}
+              </ul>
+              <div class="doc__ctas">
+                <a class="btn btn--navy" href={d.href}>View full profile</a>
+                <a class="link-arrow" href={contact.booking}>Book with {d.name.replace('Dr ', 'Dr ')}</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CONDITIONS -->
+  <section class="cond" aria-labelledby="cond-title">
+    <div class="wrap">
+      <div class="cond__head">
+        <h2 id="cond-title" class="h2 h2--light reveal">Conditions we diagnose and treat</h2>
+        <p class="reveal">From a single changing mole to long-standing eczema or hair loss, start with the area that concerns you.</p>
+      </div>
+      <div class="cond__panels" data-panels>
+        {conditions.map((g, i) => (
+          <article class="cpanel" data-open={i === 0 ? 'true' : 'false'}>
+            <img class="cpanel__img" src={g.image} alt={g.alt} loading="lazy" width="1100" height="1366" />
+            <button class="cpanel__toggle" type="button" aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`cp-${g.id}`}>
+              <span class="cpanel__title">{g.title}</span>
+              <span class="cpanel__count">{g.links.length} conditions</span>
+            </button>
+            <div class="cpanel__body" id={`cp-${g.id}`}>
+              <p>{g.blurb}</p>
+              <ul>
+                {g.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+      <a class="link-arrow link-arrow--light cond__all" href={`${OLD}/dermatology-conditions/`}>Browse all conditions</a>
+    </div>
+  </section>
+
+  <!-- FIRST VISIT (sequence) -->
+  <section class="steps" aria-labelledby="steps-title">
+    <div class="wrap">
+      <h2 id="steps-title" class="h2 reveal">Your first visit, step by step</h2>
+      <ol class="steps__list">
+        <li class="step reveal">
+          <figure><img src="/images/photos/checkin-sm.webp" alt="A patient checking in at reception" width="800" height="533" loading="lazy" /></figure>
+          <span class="step__n" aria-hidden="true">1</span>
+          <h3>Book online or by phone</h3>
+          <p>Choose a dermatologist or let our team match you. No GP referral needed if you are self-paying.</p>
+        </li>
+        <li class="step reveal">
+          <figure><img src="/images/photos/consult-desk-sm.webp" alt="A dermatologist talking with a patient at his desk" width="800" height="533" loading="lazy" /></figure>
+          <span class="step__n" aria-hidden="true">2</span>
+          <h3>Meet your consultant</h3>
+          <p>A focused consultation and examination, with tests such as swabs or biopsies arranged on site if needed.</p>
+        </li>
+        <li class="step reveal">
+          <figure><img src="/images/photos/cryo-sm.webp" alt="A patient receiving treatment from the dermatologist" width="800" height="533" loading="lazy" /></figure>
+          <span class="step__n" aria-hidden="true">3</span>
+          <h3>Start your treatment plan</h3>
+          <p>Leave with a clear plan, prescriptions from our dispensary and a follow-up to check your progress.</p>
+        </li>
+      </ol>
+      <p class="steps__fees reveal">New skin consultations from &pound;285. <a href={`${OLD}/fee-guide/`}>See our fee guide</a></p>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="blog" aria-labelledby="blog-title">
+    <div class="wrap">
+      <div class="blog__head">
+        <h2 id="blog-title" class="h2 reveal">From the blog</h2>
+        <a class="link-arrow reveal" href={`${OLD}/news/`}>Read all articles</a>
+      </div>
+      <div class="blog__grid">
+        <article class="blead reveal">
+          <a href={lead.href} class="blead__link">
+            <figure class="blead__img"><img src={lead.image} alt={lead.alt} width="1200" height="805" loading="lazy" /></figure>
+            <div class="blead__card">
+              <p class="meta"><span class="tag">{lead.tag}</span><time datetime={lead.date}>{fmt(lead.date)}</time></p>
+              <h3 class="h3">{lead.title}</h3>
+              <p>{lead.excerpt}</p>
+              <span class="link-arrow">Read article</span>
+            </div>
+          </a>
+        </article>
+        <ul class="blist">
+          {morePosts.map((p) => (
+            <li class="reveal">
+              <a href={p.href} class="bitem">
+                <figure><img src={p.image} alt={p.alt} width="1200" height="805" loading="lazy" /></figure>
+                <div>
+                  <p class="meta"><span class="tag">{p.tag}</span><time datetime={p.date}>{fmt(p.date)}</time></p>
+                  <h3>{p.title}</h3>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="wrap faq__grid">
+      <div class="faq__aside">
+        <h2 id="faq-title" class="h2 reveal">Questions patients often ask</h2>
+        <figure class="faq__img reveal">
+          <img src="/images/photos/reception-sign-sm.webp" alt="A patient arriving at the clinic reception desk" width="800" height="533" loading="lazy" />
+        </figure>
+        <div class="faq__help glass-card reveal">
+          <p>Still have a question? Our reception team can help.</p>
+          <a class="faq__phone" href={contact.phoneHref}>{contact.phone}</a>
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </div>
+      </div>
+      <div class="faq__list">
+        {faqs.map((f, i) => (
+          <details class="qa reveal" open={i === 0}>
+            <summary><span>{f.q}</span><i aria-hidden="true"></i></summary>
+            <div class="qa__a">
+              <p>{f.a}</p>
+              {f.link && <a class="link-arrow" href={f.link.href}>{f.link.label}</a>}
+            </div>
+          </details>
+        ))}
+        <a class="link-arrow faq__more" href={`${OLD}/frequently-asked-questions/`}>Read all FAQs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="ig" aria-labelledby="ig-title">
+    <div class="wrap ig__head">
+      <h2 id="ig-title" class="h2 reveal">Follow us on Instagram</h2>
+      <a class="btn btn--navy reveal" href={contact.instagram} target="_blank" rel="noopener">@thelondonskinandhairclinic</a>
+    </div>
+    <div class="ticker" data-ticker>
+      <ul class="ticker__track">
+        {[...igPosts, ...igPosts].map((src, i) => (
+          <li aria-hidden={i >= igPosts.length ? 'true' : undefined}>
+            <a href={contact.instagram} target="_blank" rel="noopener" tabindex={i >= igPosts.length ? -1 : undefined}>
+              <img src={src} alt={i < igPosts.length ? `Instagram post ${i + 1} from The London Skin and Hair Clinic` : ''} width="600" height="750" loading="lazy" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- VISIT / CTA -->
+  <section class="visit" aria-labelledby="visit-title">
+    <img class="visit__bg" src="/images/ai/london-dusk.webp" alt="" loading="lazy" width="2400" height="1018" />
+    <div class="wrap visit__inner">
+      <div class="visit__card reveal">
+        <h2 id="visit-title" class="h2">Ready to get answers about your skin?</h2>
+        <p>Book a consultation online in minutes, or call our team to find the right dermatologist for you.</p>
+        <div class="visit__ctas">
+          <a class="btn btn--amber btn--lg" href={contact.booking}>Book a consultation</a>
+          <a class="btn btn--outline btn--lg" href={contact.phoneHref}>Call {contact.phone}</a>
+        </div>
+        <div class="visit__info">
+          <div>
+            <h3>Find us</h3>
+            <address>{contact.address.join(', ')}</address>
+            <a class="link-arrow" href={contact.maps} target="_blank" rel="noopener">Get directions</a>
+          </div>
+          <div>
+            <h3>Opening hours</h3>
+            <dl>{contact.hours.map(([d, h]) => (<div><dt>{d}</dt><dd>{h}</dd></div>))}</dl>
+          </div>
+        </div>
+      </div>
+      <figure class="visit__sat reveal" data-parallax="-0.05">
+        <img src="/images/photos/holborn-street-sm.webp" alt="A patient on High Holborn near the clinic" width="800" height="533" loading="lazy" />
+      </figure>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Header state + back to top */
+  const header = document.querySelector('[data-header]');
+  const toTop = document.querySelector('[data-to-top]');
+  const onScroll = () => {
+    const y = window.scrollY;
+    header?.classList.toggle('is-scrolled', y > 40);
+    toTop?.classList.toggle('is-visible', y > 700);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
+
+  /* Mobile menu */
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const mnav = document.getElementById('mnav');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    toggle.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
+    if (mnav) mnav.hidden = open;
+    document.body.classList.toggle('menu-open', !open);
+  });
+
+  /* Hero video: smaller file on phones, pause when off-screen or reduced motion */
+  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+  if (video) {
+    if (window.innerWidth < 760) {
+      video.querySelector('source')?.setAttribute('src', '/video/hero-mobile.mp4');
+      video.load();
+    }
+    if (reduce) video.pause();
+    else new IntersectionObserver(([e]) => (e.isIntersecting ? video.play().catch(() => {}) : video.pause())).observe(video);
+  }
+
+  /* Scroll reveals */
+  const reveals = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) reveals.forEach((el) => el.classList.add('is-in'));
+  else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    reveals.forEach((el) => io.observe(el));
+  }
+
+  /* Parallax satellites */
+  const para = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];
+  const paraBg = [...document.querySelectorAll<HTMLElement>('[data-parallax-bg]')];
+  if (!reduce && (para.length || paraBg.length)) {
+    let ticking = false;
+    const run = () => {
+      const vh = window.innerHeight;
+      para.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const off = (r.top + r.height / 2 - vh / 2) * parseFloat(el.dataset.parallax || '0');
+        el.style.setProperty('--py', `${off.toFixed(1)}px`);
+      });
+      paraBg.forEach((el) => {
+        const r = el.parentElement!.getBoundingClientRect();
+        el.style.transform = `translate3d(0, ${(r.top * -0.15).toFixed(1)}px, 0) scale(1.15)`;
+      });
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(run); } }, { passive: true });
+    run();
+  }
+
+  /* Reviews carousel */
+  const car = document.querySelector<HTMLElement>('[data-carousel]');
+  const track = document.querySelector<HTMLElement>('[data-car-track]');
+  const bar = document.querySelector<HTMLElement>('[data-car-bar]');
+  if (car && track) {
+    const cards = [...track.children] as HTMLElement[];
+    let index = 0;
+    let timer: number | undefined;
+    const perView = () => {
+      const w = cards[0].getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).columnGap || '24');
+      return { step: w + gap, visible: Math.max(1, Math.floor((car.clientWidth + gap) / (w + gap))) };
+    };
+    const go = (i: number) => {
+      const { step, visible } = perView();
+      const max = Math.max(0, cards.length - visible);
+      index = i > max ? 0 : i < 0 ? max : i;
+      track.style.transform = `translate3d(${-index * step}px,0,0)`;
+      if (bar) bar.style.width = `${((index + visible) / cards.length) * 100}%`;
+      cards.forEach((c, k) => c.toggleAttribute('inert', k < index || k >= index + visible));
+    };
+    const start = () => { if (!reduce) { stop(); timer = window.setInterval(() => go(index + 1), 6000); } };
+    const stop = () => window.clearInterval(timer);
+    document.querySelector('[data-car-next]')?.addEventListener('click', () => { go(index + 1); start(); });
+    document.querySelector('[data-car-prev]')?.addEventListener('click', () => { go(index - 1); start(); });
+    car.addEventListener('mouseenter', stop);
+    car.addEventListener('mouseleave', start);
+    car.addEventListener('focusin', stop);
+    car.addEventListener('focusout', start);
+    // touch swipe
+    let sx = 0;
+    car.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; stop(); }, { passive: true });
+    car.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+      start();
+    });
+    // read more
+    cards.forEach((c) => {
+      const text = c.querySelector<HTMLElement>('[data-clamp]');
+      const btn = c.querySelector<HTMLButtonElement>('[data-more]');
+      if (!text || !btn) return;
+      const check = () => { btn.hidden = !(text.scrollHeight > text.clientHeight + 4 || c.classList.contains('is-open')); };
+      btn.addEventListener('click', () => {
+        const open = c.classList.toggle('is-open');
+        btn.textContent = open ? 'Show less' : 'Read more';
+        btn.setAttribute('aria-expanded', String(open));
+        if (open) stop(); else start();
+      });
+      btn.setAttribute('aria-expanded', 'false');
+      requestAnimationFrame(check);
+      window.addEventListener('resize', check);
+    });
+    window.addEventListener('resize', () => go(index));
+    go(0);
+    start();
+  }
+
+  /* Generic tabs (treatments + team) */
+  const setupTabs = (root: Element | null, tabSel: string, panelSel: string) => {
+    if (!root) return;
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>(tabSel)];
+    const panels = [...root.querySelectorAll<HTMLElement>(panelSel)];
+    const select = (i: number, focus = false) => {
+      tabs.forEach((t, k) => {
+        const on = k === i;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        panels[k].hidden = !on;
+        panels[k].dataset.active = String(on);
+      });
+      if (focus) tabs[i].focus();
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(i));
+      t.addEventListener('keydown', (e) => {
+        const dir = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+        if (dir) { e.preventDefault(); select((i + dir + tabs.length) % tabs.length, true); }
+      });
+    });
+  };
+  setupTabs(document.querySelector('[data-tabs]'), '.treat__tab', '.treat__panel');
+  setupTabs(document.querySelector('[data-team]'), '.team__thumb', '.doc');
+
+  /* Condition panels */
+  const panelsRoot = document.querySelector('[data-panels]');
+  if (panelsRoot) {
+    const items = [...panelsRoot.querySelectorAll<HTMLElement>('.cpanel')];
+    const open = (el: HTMLElement) => items.forEach((p) => {
+      const on = p === el;
+      p.dataset.open = String(on);
+      p.querySelector('.cpanel__toggle')?.setAttribute('aria-expanded', String(on));
+    });
+    items.forEach((p) => {
+      p.querySelector('.cpanel__toggle')?.addEventListener('click', () => open(p));
+      p.addEventListener('mouseenter', () => { if (window.matchMedia('(hover: hover) and (min-width: 1024px)').matches) open(p); });
+    });
+  }
+
+  /* FAQ: one open at a time */
+  const qas = [...document.querySelectorAll<HTMLDetailsElement>('.qa')];
+  qas.forEach((d) => d.addEventListener('toggle', () => { if (d.open) qas.forEach((o) => { if (o !== d) o.open = false; }); }));
+</script>
