@@ -15,7 +15,7 @@
   --ink: #14233a;
   --muted: #56677f;
 
-  --serif: 'Bodoni Moda', 'Didot', 'Times New Roman', serif;
+  --serif: 'Urbanist', system-ui, -apple-system, 'Segoe UI', sans-serif; /* display/headline face */
   --sans: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --r-xl: 34px;
@@ -70,8 +70,8 @@ address { font-style: normal; }
   font-family: var(--serif);
   font-weight: 500;
   font-size: clamp(2.1rem, 1.35rem + 2.6vw, 3.55rem);
-  line-height: 1.06;
-  letter-spacing: -0.015em;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
   color: var(--navy);
   max-width: 18ch;
   text-wrap: balance;
@@ -265,7 +265,7 @@ address { font-style: normal; }
 .hero__title {
   font-family: var(--serif); font-weight: 500;
   font-size: clamp(2.5rem, 1.4rem + 3.4vw, 4.6rem);
-  line-height: 1.02; letter-spacing: -0.02em; text-wrap: balance;
+  line-height: 1.08; letter-spacing: -0.025em; text-wrap: balance;
 }
 .hero__sub { margin-top: 22px; font-size: clamp(1.05rem, 1rem + 0.3vw, 1.22rem); color: rgba(255, 255, 255, 0.86); max-width: 50ch; }
 .hero__points { margin-top: 28px; display: grid; gap: 11px; }
