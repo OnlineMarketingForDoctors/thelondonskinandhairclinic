@@ -84,7 +84,7 @@ const igPosts = Array.from({ length: 8 }, (_, i) => `/images/instagram/post-${i 
             <div class="rcard__text" data-clamp>
               {r.text.split('\n\n').map((p) => <p>{p}</p>)}
             </div>
-            <button class="rcard__more" type="button" data-more hidden>Read more</button>
+            <button class="rcard__more is-hidden" type="button" data-more>Read more</button>
           </li>
         ))}
       </ul>
@@ -548,7 +548,8 @@ const igPosts = Array.from({ length: 8 }, (_, i) => `/images/instagram/post-${i 
       const text = c.querySelector<HTMLElement>('[data-clamp]');
       const btn = c.querySelector<HTMLButtonElement>('[data-more]');
       if (!text || !btn) return;
-      const check = () => { btn.hidden = !(text.scrollHeight > text.clientHeight + 4 || c.classList.contains('is-open')); };
+      // Keep the button's space reserved so collapsed cards stay the same height
+      const check = () => { btn.classList.toggle('is-hidden', !(text.scrollHeight > text.clientHeight + 4 || c.classList.contains('is-open'))); };
       btn.addEventListener('click', () => {
         const open = c.classList.toggle('is-open');
         btn.textContent = open ? 'Show less' : 'Read more';

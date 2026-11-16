@@ -328,9 +328,10 @@ address { font-style: normal; }
 .rcard__avatar { width: 44px; height: 44px; flex: none; border-radius: 50%; display: grid; place-items: center; font-weight: 800; color: var(--white); background: var(--grad-navy); }
 .rcard:nth-child(even) .rcard__avatar { background: var(--grad-amber); color: var(--navy-deep); }
 .rcard__name { font-weight: 800; color: var(--navy); line-height: 1.2; }
-.rcard__text { margin-top: 14px; color: #33435b; font-size: 1rem; display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+.rcard__text { margin-top: 14px; color: #33435b; font-size: 1rem; line-height: 1.65; min-height: calc(1.65em * 6); display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
 .rcard__text p + p { margin-top: 10px; }
 .rcard.is-open .rcard__text { display: block; -webkit-line-clamp: unset; }
+.rcard__more.is-hidden { visibility: hidden; }
 .rcard__more { margin-top: 14px; padding: 0; border: 0; background: none; cursor: pointer; font-weight: 800; color: var(--amber-deep); text-decoration: underline; text-underline-offset: 4px; }
 .carousel__foot { margin-top: 40px; display: flex; align-items: center; gap: 30px; justify-content: space-between; }
 .carousel__progress { flex: 1; max-width: 420px; height: 3px; border-radius: 3px; background: var(--mist); overflow: hidden; }
