@@ -79,8 +79,8 @@ export const treatments = [
     id: 'skin',
     title: 'Medical skin treatments',
     summary: 'Prescription treatments, light therapies and minor surgery for acne, rosacea, psoriasis, warts and skin lesions.',
-    image: '/images/photos/phototherapy-laser.webp',
-    alt: 'A clinician using a handheld light therapy device on a patient’s arm',
+    image: '/images/photos/phototherapy-booth.webp',
+    alt: 'A patient standing in the clinic’s full-body phototherapy cabinet',
     satellite: '/images/photos/cryo-smile-sm.webp',
     satelliteAlt: 'Dr Martin Wade chatting with a patient before cryotherapy',
     links: [
