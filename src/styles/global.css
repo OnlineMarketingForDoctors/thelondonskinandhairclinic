@@ -320,21 +320,25 @@ body.vbox-open { overflow: hidden; }
 .hero__badges { justify-self: end; align-self: end; display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: stretch; gap: 14px; }
 .cqcbadge {
   display: flex; align-items: center; padding: 16px 24px; border-radius: 20px;
-  background: rgba(255, 255, 255, 0.95); box-shadow: var(--sh-lg); transition: transform 0.4s var(--ease);
+  background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 20px 40px -24px rgba(0, 0, 0, 0.5); transition: transform 0.4s var(--ease), background 0.3s;
 }
-.cqcbadge:hover { transform: translateY(-4px); }
+.cqcbadge:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.22); }
 .cqcbadge img { width: auto; height: 50px; }
 .gbadge {
   display: flex; align-items: center; gap: 14px;
   padding: 16px 22px 16px 16px; border-radius: 20px;
-  background: rgba(255, 255, 255, 0.95); color: var(--ink); text-decoration: none;
-  box-shadow: var(--sh-lg); transition: transform 0.4s var(--ease);
+  color: var(--white); text-decoration: none;
+  background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 20px 40px -24px rgba(0, 0, 0, 0.5); transition: transform 0.4s var(--ease), background 0.3s;
 }
-.gbadge:hover { transform: translateY(-4px); }
-.gbadge__g { width: 54px; height: 54px; border-radius: 14px; display: grid; place-items: center; background: var(--ice); }
+.gbadge:hover { transform: translateY(-4px); background: rgba(255, 255, 255, 0.22); }
+.gbadge__g { width: 54px; height: 54px; border-radius: 14px; display: grid; place-items: center; background: rgba(255, 255, 255, 0.92); }
 .gbadge__body { display: grid; line-height: 1.2; }
-.gbadge__score { font-weight: 800; font-size: 1.5rem; color: var(--navy); display: flex; align-items: center; gap: 10px; }
-.gbadge__count { font-size: 0.86rem; color: var(--muted); font-weight: 600; }
+.gbadge__score { font-weight: 800; font-size: 1.5rem; color: var(--white); display: flex; align-items: center; gap: 10px; }
+.gbadge__count { font-size: 0.86rem; color: rgba(255, 255, 255, 0.82); font-weight: 600; }
 
 .hero__scroll { position: absolute; z-index: 1; left: 50%; bottom: 26px; translate: -50% 0; width: 28px; height: 46px; border: 2px solid rgba(255, 255, 255, 0.6); border-radius: 20px; }
 .hero__scroll span { position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--amber); animation: scrollDot 2s var(--ease) infinite; }
@@ -355,12 +359,15 @@ body.vbox-open { overflow: hidden; }
 @media (max-width: 520px) {
   .hero__points li { font-size: 0.96rem; }
   .hero__ctas .btn { width: 100%; }
-  .hero__badges { gap: 10px; }
-  .gbadge { padding: 12px 16px 12px 12px; gap: 10px; }
-  .gbadge__g { width: 44px; height: 44px; }
-  .gbadge__score { font-size: 1.25rem; gap: 6px; }
-  .cqcbadge { padding: 12px 16px; }
-  .cqcbadge img { height: 34px; }
+  .hero__badges { gap: 8px; flex-wrap: nowrap; }
+  .gbadge { padding: 10px 12px 10px 10px; gap: 8px; }
+  .gbadge__g { width: 40px; height: 40px; }
+  .gbadge__g svg { width: 26px; height: 26px; }
+  .gbadge__score { font-size: 1.15rem; gap: 5px; }
+  .gbadge__score .stars--sm { font-size: 0.78rem; letter-spacing: 0; }
+  .gbadge__count { font-size: 0.76rem; }
+  .cqcbadge { padding: 10px 12px; }
+  .cqcbadge img { height: 30px; }
 }
 
 /* ==========================================================
